@@ -7,6 +7,8 @@ const { ChatMessage } = require("./utils/chat-msg");
 const app = express();
 app.use(cors());
 
+app.use("/api/auth");
+
 const server = http.createServer(app);
 
 const io = socketio(server);
