@@ -2,24 +2,29 @@ const express = require("express");
 const http = require("http");
 const socketio = require("socket.io");
 const cors = require("cors");
-const { ChatMessage } = require("./utils/chat-msg");
+const Auth = require("./routes/Auth");
+const connectDB = require("./config/db");
+const onConnect = require("./utils/onConnect");
+const error = require("./middleware/error");
 
 const app = express();
-app.use(cors());
 
-app.use("/api/auth");
+// Connect DB
+connectDB();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use("/api/auth", Auth);
+
+app.use(error);
 
 const server = http.createServer(app);
 
 const io = socketio(server);
 
-io.on("connect", (socket) => {
-  console.log("User");
-
-  socket.on("msg", (msg) => {
-    socket.broadcast.emit("new-msg", ChatMessage("User", msg, Date.now()));
-  });
-});
+io.on("connect", (socket) => onConnect(socket));
 
 const PORT = process.env.PORT || 5000;
 

@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://nano2020:nanodb2020@ws-upchat.okqqx.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "JWT_SECRET": "SECRET"
+}
