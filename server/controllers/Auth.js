@@ -1,18 +1,52 @@
 const User = require("../models/User");
 const generateToken = require("../utils/generateToken");
+const bcrypt = require("bcryptjs");
 
 // @route     POST api/auth/
 // @desc      Check auth of User
-// @access    Public
-exports.checkAuth = (req, res) => {
-  res.send("Checking auth of user");
+// @access    Private
+exports.checkAuth = async (req, res, next) => {
+  const userID = req.user;
+
+  let user = await User.findById(userID.id).select("-password");
+
+  let token = await generateToken(user);
+
+  res.json({ success: true, msg: "User is valid", token });
 };
 
 // @route     POST api/auth/login
 // @desc      Login a user
 // @access    Public
-exports.loginUser = (req, res, next) => {
-  const { email, password } = req;
+exports.loginUser = async (req, res, next) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = await User.findOne({ email });
+    if (!user)
+      return await res.json({
+        success: false,
+        msg: "The email or password is incorrect",
+      });
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch)
+      return await res.json({
+        success: false,
+        msg: "The email or password is incorrect",
+      });
+
+    let token = await generateToken(user);
+
+    await res.json({
+      success: true,
+      msg: `User ${email} has been logged in`,
+      token: token,
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // @route     POST api/auth/register

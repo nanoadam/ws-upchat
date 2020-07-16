@@ -9,6 +9,10 @@ const errHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 400);
   }
 
+  if (err.name === "JsonWebTokenError") {
+    error = new ErrorResponse("The JWT token is not formatted correctly");
+  }
+
   res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || "Server error",
