@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import authContext from "../../context/auth/AuthContext";
 
 const Login = () => {
+  const AuthContext = useContext(authContext);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    AuthContext.login(e.target[0].value, e.target[1].value);
+  };
   return (
     <div>
       <div className="row">
         <div className="card col-md-4 mx-auto mt-4">
           <div className="card-body">
             <h2 className="text-center">Login</h2>
-            <form>
+            <form onSubmit={onSubmit}>
               <div className="form-group mb-3">
                 <label>Email Address</label>
                 <input type="text" className="form-control" />

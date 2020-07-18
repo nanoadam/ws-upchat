@@ -4,20 +4,23 @@ import Home from "./pages/Home";
 import ChatState from "./context/chats/ChatState";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
+import AuthState from "./context/auth/authState";
 
 const App = () => {
   return (
-    <ChatState>
-      <Router>
-        <div>
-          <Switch>
-            <Route path="/" component={Home} exact />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-          </Switch>
-        </div>
-      </Router>
-    </ChatState>
+    <AuthState>
+      <ChatState>
+        <Router>
+          <div>
+            <Switch>
+              <Route path="/" component={Home} exact />
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+            </Switch>
+          </div>
+        </Router>
+      </ChatState>
+    </AuthState>
   );
 };
 

@@ -6,6 +6,7 @@ const Auth = require("./routes/Auth");
 const connectDB = require("./config/db");
 const onConnect = require("./utils/onConnect");
 const error = require("./middleware/error");
+const morgan = require("morgan");
 
 const app = express();
 
@@ -15,6 +16,8 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.use(morgan("dev"));
 
 app.use("/api/auth", Auth);
 
