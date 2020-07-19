@@ -2,10 +2,9 @@ import React, { useContext } from "react";
 import authContext from "../../context/auth/AuthContext";
 
 const Login = () => {
-  const AuthContext = useContext(authContext);
   const onSubmit = (e) => {
     e.preventDefault();
-    AuthContext.login(e.target[0].value, e.target[1].value);
+    // AuthContext.login(e.target[0].value, e.target[1].value);
   };
   return (
     <div>
