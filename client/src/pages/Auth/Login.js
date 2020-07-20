@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import authContext from "../../context/auth/AuthContext";
+import { connect } from "react-redux";
 
 const Login = () => {
   const onSubmit = (e) => {
@@ -9,7 +9,7 @@ const Login = () => {
   return (
     <div>
       <div className="row">
-        <div className="card col-md-4 mx-auto mt-4">
+        <div className="card bg-light text-dark col-md-4 mx-auto mt-4">
           <div className="card-body">
             <h2 className="text-center">Login</h2>
             <form onSubmit={onSubmit}>
@@ -30,4 +30,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default connect()(Login);
