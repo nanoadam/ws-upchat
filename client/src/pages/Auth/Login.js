@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { login } from "../../actions/auth";
+import { useSelector, useDispatch } from "react-redux";
 
 const Login = () => {
+  const dispatch = useDispatch();
   const onSubmit = (e) => {
     e.preventDefault();
-    // AuthContext.login(e.target[0].value, e.target[1].value);
+    dispatch(login(e.target[0].value, e.target[1].value));
   };
   return (
     <div>
@@ -30,4 +32,4 @@ const Login = () => {
   );
 };
 
-export default connect()(Login);
+export default Login;
