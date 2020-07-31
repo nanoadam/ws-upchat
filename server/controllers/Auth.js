@@ -24,7 +24,7 @@ exports.loginUser = async (req, res, next) => {
   try {
     let user = await User.findOne({ email });
     if (!user)
-      return await res.json({
+      return await res.status(404).json({
         success: false,
         msg: "The email or password is incorrect",
       });
@@ -32,7 +32,7 @@ exports.loginUser = async (req, res, next) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch)
-      return await res.json({
+      return await res.status(404).json({
         success: false,
         msg: "The email or password is incorrect",
       });

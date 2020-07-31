@@ -1,5 +1,6 @@
 import axios from "axios";
 import ENDPOINT from "../config/ENDPOINT";
+import { AUTH_SUCCESS, AUTH_ERROR } from "./types";
 
 export const login = (email, password) => async (dispatch) => {
   console.log(email, password);
@@ -9,10 +10,9 @@ export const login = (email, password) => async (dispatch) => {
       password: password,
     });
 
-    dispatch();
-
-    await console.log(res);
+    await dispatch({ type: AUTH_SUCCESS, payload: res.data });
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data.msg);
+    dispatch({ type: AUTH_ERROR, payload: err.response.data.msg });
   }
 };
