@@ -1,6 +1,6 @@
-const User = require("../models/User");
-const generateToken = require("../utils/generateToken");
-const bcrypt = require("bcryptjs");
+const User = require('../models/User');
+const generateToken = require('../utils/generateToken');
+const bcrypt = require('bcryptjs');
 
 // @route     POST api/auth/
 // @desc      Check auth of User
@@ -8,11 +8,11 @@ const bcrypt = require("bcryptjs");
 exports.checkAuth = async (req, res, next) => {
   const userID = req.user;
 
-  let user = await User.findById(userID.id).select("-password");
+  let user = await User.findById(userID.id).select('-password');
 
   let token = await generateToken(user);
 
-  res.json({ success: true, msg: "User is valid", token });
+  res.json({ success: true, msg: 'User is valid', token });
 };
 
 // @route     POST api/auth/login
@@ -24,17 +24,17 @@ exports.loginUser = async (req, res, next) => {
   try {
     let user = await User.findOne({ email });
     if (!user)
-      return await res.status(404).json({
+      return await res.status(403).json({
         success: false,
-        msg: "The email or password is incorrect",
+        msg: 'The email or password is incorrect',
       });
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch)
-      return await res.status(404).json({
+      return await res.status(403).json({
         success: false,
-        msg: "The email or password is incorrect",
+        msg: 'The email or password is incorrect',
       });
 
     let token = await generateToken(user);

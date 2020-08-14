@@ -1,11 +1,12 @@
-import axios from "axios";
-import ENDPOINT from "../config/ENDPOINT";
-import { AUTH_SUCCESS, AUTH_ERROR } from "./types";
+import axios from 'axios';
+import ENDPOINT from '../config/ENDPOINT';
+import { AUTH_SUCCESS, AUTH_ERROR } from './types';
+import { useHistory } from 'react-router-dom';
 
 export const login = (email, password) => async (dispatch) => {
   console.log(email, password);
   try {
-    const res = await axios.post(ENDPOINT + "/api/auth/login", {
+    const res = await axios.post(ENDPOINT + '/api/auth/login', {
       email: email,
       password: password,
     });

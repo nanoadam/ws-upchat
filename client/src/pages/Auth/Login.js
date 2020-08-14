@@ -1,6 +1,6 @@
-import React from "react";
-import { login } from "../../actions/auth";
-import { useSelector, useDispatch } from "react-redux";
+import React from 'react';
+import { login } from '../../actions/auth';
+import { useSelector, useDispatch } from 'react-redux';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,11 @@ const Login = () => {
                 <label>Password</label>
                 <input type="password" className="form-control" />
               </div>
-              <input type="submit" className="btn btn-primary btn-block" />
+              <input
+                type="submit"
+                className="btn btn-primary btn-block"
+                title="Login"
+              />
             </form>
           </div>
         </div>
