@@ -1,10 +1,6 @@
 import { createStore } from 'vuex';
+import Auth from './Auth';
 
 export default createStore({
-  state: {
-    name: 'Nano',
-  },
-  mutations: {},
-  actions: {},
-  modules: {},
+  modules: { Auth },
 });

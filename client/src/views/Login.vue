@@ -1,15 +1,28 @@
 <template>
-  <h1>Login Page {{ name }}</h1>
+  <div class="card">
+    <h3>Login</h3>
+    <label>Email</label>
+    <input type="text" v-model="email" />
+    <br />
+    <label>Password</label>
+    <input type="text" v-model="password" />
+    <br />
+    <button @click.prevent="login">Login</button>
+  </div>
 </template>
 
 <script>
-import { useState } from 'vuex-composition-helpers/dist';
+import { ref } from 'vue';
+import { mapActions } from 'vuex';
+
 export default {
   setup() {
-    const { name } = useState(['name']);
-    console.log('helo');
+    const email = ref('');
+    const password = ref('');
 
-    return { name };
+    const { login } = mapActions(['login']);
+
+    return { name, email, password, login };
   },
 };
 </script>
