@@ -1,15 +1,17 @@
 <template>
-  <h1>Login Page</h1>
+  <h1>Login Page {{ name }}</h1>
 </template>
 
 <script>
-import { setup } from "vue";
+import { useState } from 'vuex-composition-helpers/dist';
 export default {
   setup() {
-    console.log("helo");
+    const { name } = useState(['name']);
+    console.log('helo');
+
+    return { name };
   },
 };
 </script>
 
-<style>
-</style>
+<style></style>

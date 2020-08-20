@@ -8304,6 +8304,11 @@ vue@^3.0.0-0:
     "@vue/runtime-dom" "3.0.0-rc.5"
     "@vue/shared" "3.0.0-rc.5"
 
+vuex-composition-helpers@^1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/vuex-composition-helpers/-/vuex-composition-helpers-1.0.20.tgz#2316596c753caea69e60fc70b6bd487dbf1b913e"
+  integrity sha512-kDCSvhuTKwCkiKMH+xsqDEstWiSmyUCluAGucS5eJWYmMrI/gkJoqn42d4RmridzOpBUOu3/ZmUU1OW5W1JLQQ==
+
 vuex@^4.0.0-0:
   version "4.0.0-beta.4"
   resolved "https://registry.npm.taobao.org/vuex/download/vuex-4.0.0-beta.4.tgz#7b319ead2ef30432b7eaa4e37258ea3c5e44f698"
