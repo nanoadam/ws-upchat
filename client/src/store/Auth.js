@@ -1,7 +1,8 @@
 import axios from '../config/axios';
 
 const state = {
-  name: 'Nano Adam',
+  email: '',
+  token: localStorage.getItem('auth-token'),
 };
 
 const getters = {
@@ -9,16 +10,19 @@ const getters = {
 };
 
 const actions = {
-  login: async (payload) => {
+  login: async ({ commit }, payload) => {
+    console.log(payload);
     try {
       const res = await axios.post('/api/auth/login', {
         email: payload.email,
         password: payload.password,
       });
 
-      console.log(res);
+      localStorage.setItem('auth-token', res.data.token);
+
+      console.log(res.data);
     } catch (err) {
-      console.log(err.message);
+      console.log(err.response.data.msg);
     }
   },
 };
