@@ -10,7 +10,7 @@ const getters = {
 };
 
 const actions = {
-  login: async ({ commit }, payload) => {
+  login: async ({ commit, dispatch }, payload) => {
     console.log(payload);
     try {
       const res = await axios.post('/api/auth/login', {
@@ -20,9 +20,15 @@ const actions = {
 
       localStorage.setItem('auth-token', res.data.token);
 
-      console.log(res.data);
+      dispatch(
+        'alert/setAlert',
+        { msg: res.data.msg, type: 'success' },
+        { root: true }
+      );
+
+      // console.log(res.data);
     } catch (err) {
-      console.log(err.response.data.msg);
+      console.log(err);
     }
   },
 };
@@ -30,6 +36,7 @@ const actions = {
 const mutations = {};
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

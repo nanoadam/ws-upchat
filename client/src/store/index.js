@@ -1,6 +1,7 @@
 import { createStore } from 'vuex';
 import Auth from './Auth';
+import Alert from './Alert';
 
 export default createStore({
-  modules: { Auth },
+  modules: { auth: Auth, alert: Alert },
 });

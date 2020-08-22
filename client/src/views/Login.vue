@@ -1,6 +1,13 @@
 <template>
   <div class="card">
     <h3>Login</h3>
+
+    <div v-if="alerts">
+      <div class="alert" v-for="alert in alerts" :key="alert.msg">
+        {{ alert.msg }}
+      </div>
+    </div>
+
     <div class="form-group">
       <label>Email</label>
       <input type="text" v-model="email" />
@@ -11,13 +18,13 @@
       <input type="text" v-model="password" />
     </div>
 
-    <button @click.prevent="login({ email, password })">Login</button>
+    <button @click.prevent="login">Login</button>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
-import { mapActions } from 'vuex';
+import { ref, computed } from 'vue';
+import { useStore } from 'vuex';
 import axios from 'axios';
 
 export default {
@@ -25,9 +32,18 @@ export default {
     const email = ref('');
     const password = ref('');
 
-    const { login } = mapActions(['login']);
+    const store = useStore();
 
-    return { name, email, password, login };
+    const alerts = computed(() => store.getters['alert/allAlerts']);
+
+    async function login() {
+      await store.dispatch('auth/login', {
+        email: email.value,
+        password: password.value,
+      });
+    }
+
+    return { email, password, login, alerts };
   },
 };
 </script>
