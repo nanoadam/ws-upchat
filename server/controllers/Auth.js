@@ -8,11 +8,11 @@ const bcrypt = require('bcryptjs');
 exports.checkAuth = async (req, res, next) => {
   const userID = req.user;
 
-  let user = await User.findById(userID.id).select('-password');
+  let user = await User.findById(userID.id).select('-password -_id');
 
   let token = await generateToken(user);
 
-  res.json({ success: true, msg: 'User is valid', token });
+  res.json({ success: true, msg: 'User is valid', token, user });
 };
 
 // @route     POST api/auth/login
