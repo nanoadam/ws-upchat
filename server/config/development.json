@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://nano2020:nanodb2020@ws-upchat.okqqx.mongodb.net/<dbname>?retryWrites=true&w=majority",
+  "mongoURI": "mongodb://localhost/ws-upchat",
   "JWT_SECRET": "SECRET"
 }
