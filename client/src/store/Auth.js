@@ -39,6 +39,7 @@ const actions = {
     }
   },
   getCurrentUser: async ({ commit, state }) => {
+    if (!state.token) return (state.isAuth = false);
     try {
       const res = await axios.get("/api/auth", {
         headers: {
@@ -50,6 +51,7 @@ const actions = {
 
       state.isAuth = true;
     } catch (err) {
+      state.isAuth = false;
       console.log(err);
     }
   },

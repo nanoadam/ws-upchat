@@ -39,24 +39,23 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  await store.dispatch("auth/getCurrentUser");
-
   // Check for Guard
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    await store.dispatch("auth/getCurrentUser");
     // Auth Check
-
     if (store.getters["auth/isAuth"]) {
-      to("/dashboard");
+      next();
+    } else {
+      next({ name: "Login" });
+      console.log("NOT ALLOWED");
     }
-
-    next();
   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
+    await store.dispatch("auth/getCurrentUser");
     if (store.getters["auth/isAuth"]) {
-      to("/dashboard");
+      next({ name: "Dashboard" });
     }
-    next();
   } else {
-    next();
+    next({ name: "Home" });
   }
 });
 

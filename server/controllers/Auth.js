@@ -6,13 +6,17 @@ const bcrypt = require("bcryptjs");
 // @desc      Check auth of User
 // @access    Private
 exports.checkAuth = async (req, res, next) => {
-  const userID = req.user;
+  try {
+    const userID = req.user;
 
-  let user = await User.findById(userID.id).select("-password -_id");
+    let user = await User.findById(userID.id).select("-password -_id");
 
-  let token = await generateToken(user);
+    let token = await generateToken(user);
 
-  res.json({ success: true, msg: "User is valid", token, user });
+    res.json({ success: true, msg: "User is valid", token, user });
+  } catch (err) {
+    next(err);
+  }
 };
 
 // @route     POST api/auth/login
