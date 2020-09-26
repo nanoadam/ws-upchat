@@ -4,9 +4,10 @@
 
 ## Todos
 
-- [ ] Login Redirect to Dashboard
+- [ ] Login Redirect to Dashbo
 - [ ] Dashboard Route
 - [ ] Get Chats
 - [ ] Send Chat
 - [ ] Settings Page
 - [ ] Chat Page
+## 
