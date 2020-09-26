@@ -48,14 +48,17 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next({ name: "Login" });
       console.log("NOT ALLOWED");
+      console.log(store.getters["auth/isAuth"]);
     }
   } else if (to.matched.some((record) => record.meta.requiresGuest)) {
     await store.dispatch("auth/getCurrentUser");
     if (store.getters["auth/isAuth"]) {
       next({ name: "Dashboard" });
+    } else {
+      next();
     }
   } else {
-    next({ name: "Home" });
+    next();
   }
 });
 
