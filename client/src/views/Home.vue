@@ -5,11 +5,7 @@
 </template>
 
 <script>
-import {} from "vue";
-
 export default {
-  setup() {
-    console.log("helo");
-  },
+  setup() {},
 };
 </script>
