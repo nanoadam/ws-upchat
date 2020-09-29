@@ -27,7 +27,7 @@ const server = http.createServer(app);
 
 const io = socketio(server);
 
-io.on('connect', (socket) => onConnect(socket));
+io.on('connect', onConnect);
 
 const PORT = process.env.PORT || 5000;
 

@@ -17,25 +17,28 @@
 </template>
 
 <script set>
-import { computed, reactive, ref } from "vue";
-import { useStore } from "vuex";
-import socket from "@/config/socket.js";
+import { computed, reactive, ref } from 'vue';
+import { useStore } from 'vuex';
+import socket from '@/config/socket.js';
 export default {
   setup() {
     const chats = reactive([]);
     const store = useStore();
     const chatInput = ref();
 
-    const user = computed(() => store.getters["auth/user"]);
+    const user = computed(() => store.getters['auth/user']);
 
-    socket.on("new-msg", (msg) => {
+    socket.on('new-msg', (msg) => {
       console.log(msg);
       chats.push(msg);
     });
 
     const onSend = () => {
-      socket.emit("msg", { msg: chatInput.value, sender: user.value.name });
-      chatInput.value = "";
+      socket.emit('msg', {
+        msg: chatInput.value,
+        sender: user.value.name,
+      });
+      chatInput.value = '';
     };
 
     return {
@@ -48,7 +51,7 @@ export default {
 };
 </script>
 
-<style >
+<style>
 .container {
   width: 80%;
   max-width: 1024px;

@@ -1,11 +1,15 @@
-const { ChatMessage } = require("./chat-msg");
+const { ChatMessage } = require('./chat-msg');
 
 const onConnect = (socket) => {
-  console.log("User");
+  console.log('User has joined');
 
-  socket.on("msg", ({ msg, sender }) => {
+  socket.on('msg', ({ msg, sender }) => {
     console.log(`User ${sender} sent a message with ${msg}`);
-    socket.emit("new-msg", ChatMessage(sender, msg, Date.now()));
+    return socket.emit('new-msg', ChatMessage(sender, msg, Date.now()));
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user has left');
   });
 };
 
