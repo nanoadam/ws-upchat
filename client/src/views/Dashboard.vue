@@ -1,15 +1,18 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Welcome to Dashboard</h1>
     <p>Welcome, {{ user.name }}</p>
+
     <div v-if="chats">
       <h4 v-for="chat in chats" v-bind:key="chat.time">
-        {{ chat.msg }}
+        {{ chat.sender }} : {{ chat.msg }}
       </h4>
     </div>
 
-    <input type="text" v-model="chatInput" />
-    <button @click="onSend">Send</button>
+    <form @submit.prevent="onSend">
+      <input type="text" v-model="chatInput" />
+      <button type="submit">Send</button>
+    </form>
   </div>
 </template>
 
@@ -26,11 +29,12 @@ export default {
     const user = computed(() => store.getters["auth/user"]);
 
     socket.on("new-msg", (msg) => {
+      console.log(msg);
       chats.push(msg);
     });
 
     const onSend = () => {
-      socket.emit("msg", chatInput.value);
+      socket.emit("msg", { msg: chatInput.value, sender: user.value.name });
       chatInput.value = "";
     };
 
@@ -44,4 +48,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style >
+.container {
+  width: 80%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+</style>

@@ -1,10 +1,11 @@
-const { ChatMessage } = require('./chat-msg');
+const { ChatMessage } = require("./chat-msg");
 
 const onConnect = (socket) => {
-  console.log('User');
+  console.log("User");
 
-  socket.on('msg', (msg) => {
-    socket.broadcast.emit('new-msg', ChatMessage('User', msg, Date.now()));
+  socket.on("msg", ({ msg, sender }) => {
+    console.log(`User ${sender} sent a message with ${msg}`);
+    socket.emit("new-msg", ChatMessage(sender, msg, Date.now()));
   });
 };
 
